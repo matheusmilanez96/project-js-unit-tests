@@ -44,10 +44,29 @@
 const createMenu = (object) => {
   const obj = {
     fetchMenu: () => object,
+    consumption: [],
+    order: (item) => {
+      const keys = [];
+      const food = Object.keys(object.food);
+      const drink = Object.keys(object.drink);
+      for (let i = 0; i < food.length; i += 1) {
+        keys.push(food[i]);
+      }
+      for (let i = 0; i < drink.length; i += 1) {
+        keys.push(drink[i]);
+      }
+      for (let i = 0; i < keys.length; i += 1) {
+        if (keys[i] === item) {
+          obj.consumption.push(item);
+          return obj.consumption;
+        }
+      }
+      return 'Item indisponível';
+    },
   };
   return obj;
 };
-    
+
 // Faça o item 5 no arquivo tests/restaurant.spec.js
 
 // 6: Adicione ao objeto retornado por `createMenu()` uma chave de nome `consumption` que, como valor inicial, tem um array vazio.
