@@ -42,14 +42,16 @@ describe('10 - Implemente a função `createMenu`, bem como seus casos de teste'
     expect(typeof meuRestaurante.fetchMenu).toBe('function');
     // 2: Verifique se 'objetoRetornado.fetchMenu()' retorna um objeto cujas chaves são somente `food` e `drink`, 
     // considerando que a função createMenu() foi chamada com o objeto: `{ food: {}, drink: {} }`.
-    const objetoRetornado = createMenu({ food: {}, drink: {} });
-    expect(Object.keys(objetoRetornado.fetchMenu())).toEqual([ 'food', 'drink' ]);
+    const meuRestaurante2 = createMenu({ food: {}, drink: {} });
+    expect(Object.keys(meuRestaurante2.fetchMenu())).toEqual([ 'food', 'drink' ]);
     // 3: Verifique se o menu passado pra função createMenu() é idêntico ao menu recuperado pela função 'objetoRetornado.fetchMenu()'.
-    expect({ food: {'coxinha': 3.9, 'sopa': 9.9}, drink: {'agua': 3.9, 'cerveja': 6.9} }).toEqual(meuRestaurante.fetchMenu());
+    const meuRestaurante3 = createMenu({ food: { coxinha: 3.9, sopa: 9.9 }, drink: { agua: 3.9, cerveja: 6.9 } });
+    expect({ food: {'coxinha': 3.9, 'sopa': 9.9}, drink: {'agua': 3.9, 'cerveja': 6.9} }).toEqual(meuRestaurante3.fetchMenu());
     // 4: Faça a implementação do item 4 do README no arquivo src/restaurant.js.
 
     // 5: Verifique se 'objetoRetornado.consumption', após a criação do menu, retorna um array vazio.
-    expect(objetoRetornado.consumption).toEqual([]);
+    const meuRestaurante5 = createMenu({ food: { coxinha: 3.9, sopa: 9.9 }, drink: { agua: 3.9, cerveja: 6.9 } });
+    expect(meuRestaurante5.consumption).toEqual([]);
     // 6: Faça a implementação do item 6 do README no arquivo src/restaurant.js.
     
     // 7: Verifique se, ao chamar uma função associada à chave `order` no objeto retornado, passando uma string como parâmetro
@@ -57,20 +59,25 @@ describe('10 - Implemente a função `createMenu`, bem como seus casos de teste'
     // - senão, deve exibir a mensagem "Item indisponível" e não adicionar nada ao array
     // Ex: obj.order('coxinha') --> ['coxinha']
     // Ex: obj.order('picanha') --> Exibe "Item indisponível"
-    expect(meuRestaurante.order('coxinha')).toEqual(['coxinha']);
-    expect(meuRestaurante.order('picanha')).toEqual('Item indisponível');
+    const meuRestaurante7 = createMenu({ food: { coxinha: 3.9, sopa: 9.9 }, drink: { agua: 3.9, cerveja: 6.9 } });
+    expect(meuRestaurante7.order('coxinha')).toEqual(['coxinha']);
+    expect(meuRestaurante7.order('picanha')).toEqual('Item indisponível');
     // 8: Faça a implementação do item 8 do README no arquivo src/restaurant.js.
 
     // 9: Verifique se, ao adicionar três pedidos em sequência, dentre bebidas e comidas, o array `objetoRetornado.consumption` contém os itens pedidos.
-    const meuRestaurante2 = createMenu({ food: { coxinha: 3.9, sopa: 9.9 }, drink: { agua: 3.9, cerveja: 6.9 } });
-    meuRestaurante2.order('coxinha');
-    meuRestaurante2.order('sopa');
-    meuRestaurante2.order('cerveja');
-    expect(meuRestaurante2.consumption).toContain('coxinha');
-    expect(meuRestaurante2.consumption).toContain('sopa');
-    expect(meuRestaurante2.consumption).toContain('cerveja');
+    const meuRestaurante9 = createMenu({ food: { coxinha: 3.9, sopa: 9.9 }, drink: { agua: 3.9, cerveja: 6.9 } });
+    meuRestaurante9.order('coxinha');
+    meuRestaurante9.order('sopa');
+    meuRestaurante9.order('cerveja');
+    expect(meuRestaurante9.consumption).toContain('coxinha');
+    expect(meuRestaurante9.consumption).toContain('sopa');
+    expect(meuRestaurante9.consumption).toContain('cerveja');
     // 10: Verifique se a função `order` aceita que pedidos repetidos sejam acrescidos a `consumption`.
-
+    const meuRestaurante10 = createMenu({ food: { coxinha: 3.9, sopa: 9.9 }, drink: { agua: 3.9, cerveja: 6.9 } });
+    meuRestaurante10.order('coxinha');
+    meuRestaurante10.order('coxinha');
+    meuRestaurante10.order('coxinha');
+    expect(meuRestaurante10.consumption).toEqual(['coxinha', 'coxinha', 'coxinha']);
     // 11: Verifique se, ao chamar `objetoRetornado.pay()`, retorna-se a soma dos preços de tudo que foi pedido, acrescido de 10%, conforme registrado em `objetoRetornado.consumption`.
 
     // 12: Faça a implementação do item 12 do README no arquivo src/restaurant.js.
