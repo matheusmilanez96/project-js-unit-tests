@@ -63,6 +63,23 @@ const createMenu = (object) => {
       }
       return 'Item indisponível';
     },
+    // eslint-disable-next-line sonarjs/cognitive-complexity, complexity
+    pay: () => {
+      let sum = 0;
+      for (let i = 0; i < obj.consumption.length; i += 1) {
+        for (let j = 0; j < Object.values(obj.fetchMenu().food).length; j += 1) {
+          if (Object.keys(obj.fetchMenu().food)[j] === obj.consumption[i]) {
+            sum += Object.values(obj.fetchMenu().food)[j];
+          }
+        }
+        for (let j = 0; j < Object.values(obj.fetchMenu().drink).length; j += 1) {
+          if (Object.keys(obj.fetchMenu().drink)[j] === obj.consumption[i]) {
+            sum += Object.values(obj.fetchMenu().drink)[j];
+          }
+        }
+      }
+      return sum;
+    },
   };
   return obj;
 };

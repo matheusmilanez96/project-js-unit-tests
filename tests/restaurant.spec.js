@@ -79,7 +79,12 @@ describe('10 - Implemente a função `createMenu`, bem como seus casos de teste'
     meuRestaurante10.order('coxinha');
     expect(meuRestaurante10.consumption).toEqual(['coxinha', 'coxinha', 'coxinha']);
     // 11: Verifique se, ao chamar `objetoRetornado.pay()`, retorna-se a soma dos preços de tudo que foi pedido, acrescido de 10%, conforme registrado em `objetoRetornado.consumption`.
-
+    const meuRestaurante11 = createMenu({ food: { coxinha: 3.9, sopa: 9.9 }, drink: { agua: 3.9, cerveja: 6.9 } });
+    meuRestaurante11.order('coxinha');
+    meuRestaurante11.order('sopa');
+    meuRestaurante11.order('agua');
+    meuRestaurante11.order('agua');
+    expect(meuRestaurante11.pay()).toBeCloseTo(21.6);
     // 12: Faça a implementação do item 12 do README no arquivo src/restaurant.js.
     
   });
