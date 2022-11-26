@@ -40,6 +40,14 @@
 
 // 4: Crie uma função `createMenu()` que, recebendo um objeto como parâmetro, retorna esse objeto no seguinte formato: 
 //  { fetchMenu: () => objetoPassadoPorParametro }.
+const checkPrice = (item, list) => {
+  for (let i = 0; i < Object.values(list).length; i += 1) {
+    if (Object.keys(list)[i] === item) {
+      return Object.values(list)[i];
+    }
+  }
+  return 0;
+};
 
 const createMenu = (object) => {
   const obj = {
@@ -63,20 +71,17 @@ const createMenu = (object) => {
       }
       return 'Item indisponível';
     },
-    // eslint-disable-next-line sonarjs/cognitive-complexity, complexity
     pay: () => {
       let sum = 0;
-      for (let i = 0; i < obj.consumption.length; i += 1) {
-        for (let j = 0; j < Object.values(obj.fetchMenu().food).length; j += 1) {
-          if (Object.keys(obj.fetchMenu().food)[j] === obj.consumption[i]) {
-            sum += Object.values(obj.fetchMenu().food)[j];
-          }
-        }
-        for (let j = 0; j < Object.values(obj.fetchMenu().drink).length; j += 1) {
-          if (Object.keys(obj.fetchMenu().drink)[j] === obj.consumption[i]) {
-            sum += Object.values(obj.fetchMenu().drink)[j];
-          }
-        }
+      const { consumption } = obj;
+      const { food } = obj.fetchMenu();
+      const { drink } = obj.fetchMenu();
+      for (let i = 0; i < consumption.length; i += 1) {
+        const item = consumption[i];
+        const priceFood = checkPrice(item, food);
+        sum += priceFood;
+        const priceDrink = checkPrice(item, drink);
+        sum += priceDrink;
       }
       return sum;
     },
@@ -84,6 +89,12 @@ const createMenu = (object) => {
   return obj;
 };
 
+const meuRestaurante11 = createMenu({ food: { coxinha: 3.9, sopa: 9.9 }, drink: { agua: 3.9, cerveja: 6.9 } });
+meuRestaurante11.order('coxinha');
+meuRestaurante11.order('sopa');
+meuRestaurante11.order('agua');
+meuRestaurante11.order('agua');
+console.log(meuRestaurante11.pay());
 // Faça o item 5 no arquivo tests/restaurant.spec.js
 
 // 6: Adicione ao objeto retornado por `createMenu()` uma chave de nome `consumption` que, como valor inicial, tem um array vazio.
